@@ -1,0 +1,116 @@
+/* Write your CSS here */
+.bgContainer {
+  background-image: linear-gradient(to right, #ffffff, #cffcf1);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logos {
+  height: 30px;
+  width: 30px;
+  margin-bottom: 25px;
+}
+.digitalTimerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.digitalClockDisplayContainer {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
+  height: 50vh;
+  width: 60vh;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.whiteBg {
+  height: 140px;
+  width: 140px;
+  border-radius: 75px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 16px 0px #bfbfbf;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+.timerDisplay {
+  color: #00d9f5;
+  font-weight: bold;
+  font-size: 40px;
+  font-family: 'roboto';
+  margin-bottom: 0px;
+}
+.para {
+  color: #1e293b;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: 'roboto';
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
+.buttuns {
+  color: #1e293b;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: 'roboto';
+  margin-top: 0px;
+  margin-bottom: 25px;
+  background-color: transparent;
+  border: 0px;
+  cursor: pointer;
+}
+.timerOperations {
+  display: flex;
+  flex-direction: column;
+  justify-content: Center;
+  align-items: center;
+}
+.pauseRestartContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.pp {
+  display: flex;
+  flex-direction: row;
+  justify-content: Center;
+  align-items: center;
+}
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 24px;
+  font-family: 'roboto';
+}
+.cc {
+  background-image: linear-gradient(to right, rgb(87, 231, 87), #00d9f5);
+  height: 40px;
+  width: 60px;
+  border-radius: 5px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'roboto';
+}
+@media only screen and (min-width: 768px) {
+  .digitalTimerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
