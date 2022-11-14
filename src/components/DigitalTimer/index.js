@@ -1,142 +1,125 @@
+// Write your code here
 import {Component} from 'react'
-
 import './index.css'
 
 class DigitalTimer extends Component {
-  state = {num: 25, pauseStartButton: false, timerInMins: 25, timerInSec: '00'}
+  state = {minutes: 25, seconds: 0, isTimerRunning: false}
 
-  pauseStartChangingButton = () => {
-    this.setState(prevState => ({
-      pauseStartButton: !prevState.pauseStartButton,
-    }))
-  }
-  //   incrementTimeElapsedInSeconds = () => {
-  //     const {timerInMins, timerInSec} = this.state
-  //     const isTimerCompleted = timerInSec === timerInMins * 60
-
-  //     if (isTimerCompleted) {
-  //       this.clearTimerInterval()
-  //       this.setState({pauseStartButton: false})
-  //     } else {
-  //       this.setState(prevState => ({
-  //         timerInSec: prevState.timerInSec + 1,
-  //       }))
-  //     }
-  //   }
-
-  //   pauseStartChangingButton = () => {
-  //     const {pauseStartButton, timerInSec, timerInMins} = this.state
-  //     const sec = parseInt(timerInSec)
-
-  //     const isTimerCompleted = sec === timerInMins * 60
-
-  //     if (isTimerCompleted) {
-  //       this.setState({timerInSec: '00'})
-  //     }
-  //     if (pauseStartButton) {
-  //       this.clearTimerInterval()
-  //     } else {
-  //       this.intervalId = setInterval(this.incrementTimeElapsedInSeconds, 1000)
-  //     }
-  //     this.setState(prevState => ({
-  //       pauseStartButton: !prevState.pauseStartButton,
-  //     }))
-  //   }
-
-  decrement = () => {
-    const {timerInMins} = this.state
-    this.setState(prevState => ({num: prevState.num - 1}))
-    const s = timerInMins - 1
-    this.setState({timerInMins: s})
+  componentDidMount() {
+    this.timerId = setInterval(this.tick, 1000)
   }
 
-  increment = () => {
-    const {timerInMins} = this.state
-    this.setState(prevState => ({num: prevState.num + 1}))
-    const s = timerInMins + 1
-    this.setState({timerInMins: s})
+  componentWillUnmount() {
+    clearInterval(this.timerId)
   }
 
-  resetButton = timeId => {
-    this.setState({timerInMins: 25})
-    this.setState({num: 25})
-    this.setState({timerInSec: '00'})
-    clearInterval(timeId)
+  tick = () => {
+    const {isTimerRunning, minutes, seconds} = this.state
+
+    if (minutes === 0 && seconds === 1) {
+      this.setState({minutes: 25, seconds: 0, isTimerRunning: false})
+    }
+
+    if (isTimerRunning && minutes >= 0) {
+      this.setState({
+        seconds: seconds > 0 ? seconds - 1 : 59,
+        minutes: seconds === 0 ? minutes - 1 : minutes,
+      })
+    }
+  }
+
+  onClickStartPauseBtn = () => {
+    this.setState(prevState => ({isTimerRunning: !prevState.isTimerRunning}))
+  }
+
+  onClickResetBtn = () => {
+    this.setState({minutes: 25, seconds: 0, isTimerRunning: false})
+  }
+
+  decrementMinutes = () => {
+    const {isTimerRunning, minutes} = this.state
+    if (isTimerRunning === false && minutes > 0) {
+      this.setState(prevState => ({minutes: prevState.minutes - 1}))
+    }
+  }
+
+  incrementMinutes = () => {
+    const {isTimerRunning} = this.state
+    if (isTimerRunning === false) {
+      this.setState(prevState => ({minutes: prevState.minutes + 1}))
+    }
   }
 
   render() {
-    const {num, pauseStartButton, timerInMins, timerInSec} = this.state
+    const {minutes, seconds, isTimerRunning} = this.state
+    // console.log(isTimerRunning)
 
-    const s = pauseStartButton ? 'Pause' : 'Start'
-    const im = pauseStartButton
+    const s = seconds < 10 ? `0${seconds}` : seconds
+    const m = minutes < 10 ? `0${minutes}` : minutes
+
+    const clockStatus = isTimerRunning ? 'Pause' : 'Start'
+    const imgg = isTimerRunning
       ? 'https://assets.ccbp.in/frontend/react-js/pause-icon-img.png'
       : 'https://assets.ccbp.in/frontend/react-js/play-icon-img.png'
 
-    const sPara = pauseStartButton ? 'Running' : 'Paused'
-    const icon = pauseStartButton ? 'pause icon' : 'play icon'
-
+    const imgAltText = isTimerRunning ? 'pause icon' : 'play icon'
+    const timerText = isTimerRunning ? 'Running' : 'Paused'
     return (
-      <div className="bgContainer">
-        <h1>Digital Timer</h1>
-        <div className="digitalTimerContainer">
-          <div className="digitalClockDisplayContainer">
-            <div className="whiteBg">
-              <h1 className="timerDisplay">
-                {timerInMins}:{timerInSec}
+      <div className="bg">
+        <h1 className="heading">Digital Timer</h1>
+        <div className="timer-display-container">
+          <div className="timer-container">
+            <div className="white-circle">
+              <h1 className="time">
+                {m}:{s}
               </h1>
-              <p className="para">{sPara}</p>
+              <p className="status">{timerText}</p>
             </div>
           </div>
-          <div className="timerOperations">
-            <div className="pauseRestartContainer">
-              <div className="pp">
-                <img src={im} alt={icon} className="logos" />
+          <div className="reset-container">
+            <div className="start-reset-container">
+              <div className="btn-container">
                 <button
                   type="button"
-                  className="buttuns"
-                  onClick={this.pauseStartChangingButton}
+                  className="start-reset-btn"
+                  onClick={this.onClickStartPauseBtn}
                 >
-                  {s}
+                  <img src={imgg} alt={imgAltText} className="btn" />
+                  <span className="text">{clockStatus}</span>
                 </button>
               </div>
-              <div className="pp">
-                <img
-                  src="https://assets.ccbp.in/frontend/react-js/reset-icon-img.png"
-                  alt="reset icon"
-                  className="logos"
-                />
+              <div className="btn-container">
                 <button
                   type="button"
-                  className="buttuns"
-                  onClick={this.resetButton}
+                  className="start-reset-btn"
+                  onClick={this.onClickResetBtn}
                 >
-                  Reset
+                  <img
+                    src="https://assets.ccbp.in/frontend/react-js/reset-icon-img.png"
+                    alt="reset icon"
+                    className="btn"
+                  />
                 </button>
+                <p className="text">Reset</p>
               </div>
             </div>
-            <p className="para">set Timer Limit</p>
-            <div className="pp">
-              <div>
-                <button
-                  type="button"
-                  className="button"
-                  onClick={this.decrement}
-                >
-                  -
-                </button>
-              </div>
-              <div className="cc">
-                <p>{num}</p>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  className="button"
-                  onClick={this.increment}
-                >
-                  +
-                </button>
-              </div>
+            <p className="reset-text">Set Timer Limit</p>
+            <div className="adjust-time-container">
+              <button
+                className="time-change-btn"
+                type="button"
+                onClick={this.decrementMinutes}
+              >
+                -
+              </button>
+              <p className="timer">{minutes}</p>
+              <button
+                className="time-change-btn"
+                type="button"
+                onClick={this.incrementMinutes}
+              >
+                +
+              </button>
             </div>
           </div>
         </div>

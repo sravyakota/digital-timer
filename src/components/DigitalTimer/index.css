@@ -1,116 +1,167 @@
 /* Write your CSS here */
-.bgContainer {
-  background-image: linear-gradient(to right, #ffffff, #cffcf1);
+.bg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(#ffffff, #cffcf1, #defafe);
   height: 100vh;
+}
+
+.heading {
+  font-family: 'Roboto';
+  font-size: 32px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.timer-display-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
-.logos {
-  height: 30px;
-  width: 30px;
-  margin-bottom: 25px;
-}
-.digitalTimerContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.digitalClockDisplayContainer {
+
+.timer-container {
   background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
-  height: 50vh;
-  width: 60vh;
   background-size: cover;
+  background-position: center;
+  min-width: 300px;
+  min-height: 300px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.whiteBg {
-  height: 140px;
-  width: 140px;
-  border-radius: 75px;
+
+.white-circle {
   background-color: #ffffff;
-  box-shadow: 0px 4px 16px 0px #bfbfbf;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   padding: 10px;
 }
-.timerDisplay {
+
+.time {
+  font-family: 'Roboto';
   color: #00d9f5;
+  font-size: 28px;
   font-weight: bold;
-  font-size: 40px;
-  font-family: 'roboto';
-  margin-bottom: 0px;
+  margin: 0;
 }
-.para {
-  color: #1e293b;
-  font-weight: bold;
+
+.status {
+  font-family: 'Roboto';
   font-size: 18px;
-  font-family: 'roboto';
-  margin-top: 0px;
-  margin-bottom: 25px;
+  margin: 0;
+  font-weight: 600;
 }
-.buttuns {
-  color: #1e293b;
-  font-weight: bold;
-  font-size: 18px;
-  font-family: 'roboto';
-  margin-top: 0px;
-  margin-bottom: 25px;
-  background-color: transparent;
-  border: 0px;
-  cursor: pointer;
-}
-.timerOperations {
-  display: flex;
-  flex-direction: column;
-  justify-content: Center;
-  align-items: center;
-}
-.pauseRestartContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.pp {
-  display: flex;
-  flex-direction: row;
-  justify-content: Center;
-  align-items: center;
-}
-.button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 24px;
-  font-family: 'roboto';
-}
-.cc {
-  background-image: linear-gradient(to right, rgb(87, 231, 87), #00d9f5);
-  height: 40px;
-  width: 60px;
-  border-radius: 5px;
-  padding: 0px;
+
+.reset-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  font-size: 20px;
-  font-family: 'roboto';
 }
-@media only screen and (min-width: 768px) {
-  .digitalTimerContainer {
-    display: flex;
+
+.start-reset-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  min-width: 120px;
+}
+
+.start-reset-btn {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  width: 30px;
+}
+
+.text {
+  font-family: 'Roboto';
+  font-size: 24px;
+  font-weight: 500;
+  padding-left: 10px;
+}
+
+.reset-text {
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.adjust-time-container {
+  display: flex;
+  align-items: center;
+}
+
+.time-change-btn {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-color: transparent;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.timer {
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: #00d9f5;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: 0px 4px 16px 0px #bfbfbf;
+  font-family: 'Roboto';
+  font-size: 24px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 768px) {
+  .bg {
+    background-image: linear-gradient(to right, #ffffff, #cffcf1, #defafe);
+  }
+
+  .heading {
+    font-size: 40px;
+  }
+
+  .timer-display-container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .timer-container {
+    width: 400px;
+    height: 400px;
+    margin-right: 30px;
+  }
+
+  .white-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .reset-container {
+    margin-left: 30px;
   }
 }
