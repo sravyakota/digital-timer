@@ -52,7 +52,6 @@ class DigitalTimer extends Component {
 
   render() {
     const {minutes, seconds, isTimerRunning} = this.state
-    // console.log(isTimerRunning)
 
     const s = seconds < 10 ? `0${seconds}` : seconds
     const m = minutes < 10 ? `0${minutes}` : minutes
@@ -109,6 +108,7 @@ class DigitalTimer extends Component {
                 className="time-change-btn"
                 type="button"
                 onClick={this.decrementMinutes}
+                disabled={isTimerRunning}
               >
                 -
               </button>
@@ -117,6 +117,7 @@ class DigitalTimer extends Component {
                 className="time-change-btn"
                 type="button"
                 onClick={this.incrementMinutes}
+                disabled={isTimerRunning}
               >
                 +
               </button>
