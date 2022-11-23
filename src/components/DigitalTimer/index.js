@@ -3,7 +3,7 @@ import {Component} from 'react'
 import './index.css'
 
 class DigitalTimer extends Component {
-  state = {minutes: 25, seconds: 0, isTimerRunning: false}
+  state = {timer: 25, minutes: 25, seconds: 0, isTimerRunning: false}
 
   componentDidMount() {
     this.timerId = setInterval(this.tick, 1000)
@@ -33,25 +33,31 @@ class DigitalTimer extends Component {
   }
 
   onClickResetBtn = () => {
-    this.setState({minutes: 25, seconds: 0, isTimerRunning: false})
+    this.setState({minutes: 25, seconds: 0, isTimerRunning: false, timer: 25})
   }
 
   decrementMinutes = () => {
     const {isTimerRunning, minutes} = this.state
     if (isTimerRunning === false && minutes > 0) {
-      this.setState(prevState => ({minutes: prevState.minutes - 1}))
+      this.setState(prevState => ({
+        minutes: prevState.minutes - 1,
+        timer: prevState.timer - 1,
+      }))
     }
   }
 
   incrementMinutes = () => {
     const {isTimerRunning} = this.state
     if (isTimerRunning === false) {
-      this.setState(prevState => ({minutes: prevState.minutes + 1}))
+      this.setState(prevState => ({
+        minutes: prevState.minutes + 1,
+        timer: prevState.timer + 1,
+      }))
     }
   }
 
   render() {
-    const {minutes, seconds, isTimerRunning} = this.state
+    const {minutes, seconds, isTimerRunning, timer} = this.state
 
     const s = seconds < 10 ? `0${seconds}` : seconds
     const m = minutes < 10 ? `0${minutes}` : minutes
@@ -112,7 +118,7 @@ class DigitalTimer extends Component {
               >
                 -
               </button>
-              <p className="timer">{minutes}</p>
+              <p className="timer">{timer}</p>
               <button
                 className="time-change-btn"
                 type="button"
